@@ -24,7 +24,7 @@ function entry(webc) {
 		"UA": webc.headerVar("User-Agent")
 	}
 }
-`, NewScriptWebContext(r, "/debug"))
+`, NewScriptContext(r, "/debug"))
 		if nil != err {
 			t.Fatal(err)
 		}

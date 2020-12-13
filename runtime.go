@@ -3,6 +3,7 @@ package scriptx
 import (
 	"fmt"
 	"github.com/dop251/goja"
+	"reflect"
 )
 
 const (
@@ -19,13 +20,21 @@ func NewScriptRuntime() *ScriptRuntime {
 	}
 }
 
-func (c *ScriptRuntime) Execute(scripts string, context interface{}) (v interface{}, err error) {
-	_, rerr := c.vm.RunScript("scriptx:entry", scripts)
+func (c *ScriptRuntime) Execute(scripts string, structContext interface{}) (v interface{}, err error) {
+	return c.Call(scripts, ScriptEntryFunName, structContext)
+}
+
+func (c *ScriptRuntime) Call(scripts string, funName string, structContext interface{}) (v interface{}, err error) {
+	rv := reflect.ValueOf(structContext)
+	if rv.IsNil() || rv.Kind() != reflect.Struct {
+		return nil, fmt.Errorf("context MUST be struct, was: %s", rv.Kind().String())
+	}
+	_, rerr := c.vm.RunScript("scriptx:"+funName, scripts)
 	if nil != rerr {
 		return nil, fmt.Errorf("compile script, error: %w", rerr)
 	}
 	var entry func(goja.Value) interface{}
-	verr := c.vm.ExportTo(c.vm.Get(ScriptEntryFunName), &entry)
+	verr := c.vm.ExportTo(c.vm.Get(funName), &entry)
 	if verr != nil {
 		return nil, fmt.Errorf("bind runtime entry function, error: %w", verr)
 	}
@@ -35,5 +44,5 @@ func (c *ScriptRuntime) Execute(scripts string, context interface{}) (v interfac
 		}
 	}()
 	c.vm.SetFieldNameMapper(goja.TagFieldNameMapper("json", true))
-	return entry(c.vm.ToValue(context)), nil
+	return entry(c.vm.ToValue(structContext)), nil
 }

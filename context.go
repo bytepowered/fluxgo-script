@@ -7,7 +7,7 @@ import (
 
 type GetVarFunc func(key string) string
 
-type ScriptWebContext struct {
+type ScriptContext struct {
 	RequestPattern    string      `json:"pattern"`
 	RequestMethod     string      `json:"method"`
 	RequestPath       string      `json:"path"`
@@ -22,9 +22,9 @@ type ScriptWebContext struct {
 	GetQueryVarFunc  GetVarFunc `json:"queryVar"`
 }
 
-func NewScriptWebContext(r *http.Request, pattern string) ScriptWebContext {
+func NewScriptContext(r *http.Request, pattern string) ScriptContext {
 	query := r.URL.Query()
-	return ScriptWebContext{
+	return ScriptContext{
 		RequestPattern:    pattern,
 		RequestMethod:     r.Method,
 		RequestPath:       r.RequestURI,
