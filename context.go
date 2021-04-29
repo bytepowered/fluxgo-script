@@ -1,9 +1,9 @@
 package fluxscript
 
 import (
-	"github.com/bytepowered/flux/flux-node"
-	"github.com/bytepowered/flux/flux-node/common"
-	"github.com/bytepowered/flux/flux-node/logger"
+	"github.com/bytepowered/flux"
+	"github.com/bytepowered/flux/common"
+	"github.com/bytepowered/flux/logger"
 	"github.com/spaolacci/murmur3"
 	"math/rand"
 	"net/http"
