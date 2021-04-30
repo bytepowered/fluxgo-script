@@ -1,1 +1,1 @@
-package fluxscript
+package script

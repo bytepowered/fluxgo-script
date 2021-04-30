@@ -1,4 +1,4 @@
-package fluxscript
+package script
 
 import (
 	"fmt"
