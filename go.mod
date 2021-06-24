@@ -1,4 +1,4 @@
-module github.com/bytepowered/flux-script
+module github.com/bytepowered/fluxgo-script
 
 go 1.14
 
