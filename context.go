@@ -1,14 +1,17 @@
 package script
 
 import (
-	"github.com/bytepowered/flux"
-	"github.com/bytepowered/flux/common"
-	"github.com/bytepowered/flux/logger"
-	"github.com/spaolacci/murmur3"
 	"math/rand"
 	"net/http"
 	"net/url"
 	"time"
+)
+
+import (
+	"github.com/bytepowered/fluxgo/pkg/common"
+	"github.com/bytepowered/fluxgo/pkg/flux"
+	"github.com/bytepowered/fluxgo/pkg/logger"
+	"github.com/spaolacci/murmur3"
 )
 
 type GetVarFunc func(key string) string
@@ -34,7 +37,7 @@ type ScriptContext struct {
 	ConsoleLogFunc  func(max interface{})    `json:"log"`
 }
 
-func NewScriptContext(webc flux.ServerWebContext, pattern string) ScriptContext {
+func NewScriptContext(webc flux.WebContext, pattern string) ScriptContext {
 	random := rand.New(rand.NewSource(time.Now().UnixNano()))
 	return ScriptContext{
 		RequestPattern: pattern,
