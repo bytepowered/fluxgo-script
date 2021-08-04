@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/flux-script.iml" filepath="$PROJECT_DIR$/.idea/flux-script.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/fluxgo-script.iml" filepath="$PROJECT_DIR$/.idea/flux-scriptgo.iml" />
     </modules>
   </component>
 </project>
